@@ -4,7 +4,7 @@ import sys
 from youtube_transcript_api import YouTubeTranscriptApi
 from flask import Flask, jsonify, request
 
-from dotenv import load_dotenv
+from dotenv import load_dotenv #type: ignore
 import requests
 load_dotenv()
 
