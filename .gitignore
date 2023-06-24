@@ -1,4 +1,4 @@
 /.vscode
-/venv
+api/api-venv
 .env
 /cli/cli-venv
