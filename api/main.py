@@ -111,11 +111,10 @@ def check_grammar(script):
     output = query({
         "inputs": script,
     })
-
-    if 'generated_text' in output[0]:
+    try:
         return output[0]['generated_text']
-    else:
-        return "Failed to generate grammar-corrected text."
+    except:
+        return output
 
 
 @app.route('/process_video', methods=['POST'])

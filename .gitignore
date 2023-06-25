@@ -3,3 +3,4 @@ api/api-venv
 .env
 /cli/cli-venv
 /telegram/telegram-venv
+*/__pycache__

@@ -12,8 +12,9 @@ logging.basicConfig(
 
 
 def process_video(video_url: str, option: int, word_length=None, ):
+    BASE_URL = os.environ.get('BASE_URL')
 
-    url = 'http://localhost:5000/process_video'
+    url = f'{BASE_URL}/process_video'
 
     data = {
         'url': str(video_url),
