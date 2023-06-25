@@ -30,8 +30,10 @@ def get_script(video_id, length, word_length):
     concatenated_text = ''
     for item in response:
         concatenated_text += item['text'] + ' '
-
-    word_length = int(word_length)
+    try:
+        word_length = int(word_length)
+    except:
+        pass
 
     script = concatenated_text.strip()
     if length == 1:
@@ -97,7 +99,7 @@ def process_video(url: str, option: int, word_length: int, check_grammar_var: bo
 
 
 def check_grammar(script):
-    API_KEY = os.getenv("API_KEY")
+    API_KEY = os.environ.get('API_KEY')
     AUTH = f"Bearer {API_KEY}"
     API_URL = "https://api-inference.huggingface.co/models/pszemraj/flan-t5-large-grammar-synthesis"
     headers = {"Authorization": AUTH}
