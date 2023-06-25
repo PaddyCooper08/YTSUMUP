@@ -21,9 +21,9 @@ def process_video(video_url: str, option: int, word_length: int = None, check_gr
     Makes the request to the api, getting the summary of the video
 
     @param video_url - URL of the video to be processed
-    @param option - Option for the video ( 0 - 100 )
-    @param word_length - Word length of the video ( None for unlimited )
-    @param check_grammar - Whether or not to check the grammar of
+    @param option - Option for the video ( 1 - 4 )
+    @param word_length - Word length of the video ( None for options 1-3  )
+    @param check_grammar - Whether or not to check the grammar of the video
     """
 
     BASE_URL = os.environ.get('BASE_URL')
