@@ -17,8 +17,18 @@ typer.secho(artwork, fg=typer.colors.RED)
 
 
 def process_video(video_url: str, option: int, word_length: int = None, check_grammar: bool = True):
+    """
+    Makes the request to the api, getting the summary of the video
 
-    url = 'http://localhost:5000/process_video'
+    @param video_url - URL of the video to be processed
+    @param option - Option for the video ( 0 - 100 )
+    @param word_length - Word length of the video ( None for unlimited )
+    @param check_grammar - Whether or not to check the grammar of
+    """
+
+    BASE_URL = os.environ.get('BASE_URL')
+
+    url = f'{BASE_URL}/process_video'
 
     data = {
         'url': video_url,
@@ -31,6 +41,7 @@ def process_video(video_url: str, option: int, word_length: int = None, check_gr
 
     response = requests.post(url, data=json.dumps(data), headers=headers)
 
+    # Handle errors and return the summary
     if response.status_code == 200:
         response_data = response.json()
         summary = response_data.get('summary')
@@ -43,8 +54,14 @@ def process_video(video_url: str, option: int, word_length: int = None, check_gr
         sys.exit()
 
 
+"""
+        Typer code that prompts the user for the required params and sends them to the correct functions.
+        """
+
+
 @app.command()
 def process_youtube_video(
+
         video_url: str = typer.prompt("Enter the YouTube video URL"),
         option: int = typer.prompt(
             "Choose an option: 1 (Short), 2 (Medium), 3 (Long), 4 (Custom)",
@@ -57,6 +74,7 @@ def process_youtube_video(
 
     if option == 4:
         word_length = None
+        # This function uses separate threads to run the loading animation and the process_video function
         while True:
             try:
                 word_length = int(
@@ -89,5 +107,6 @@ def process_youtube_video(
         typer.echo("\rLoading... Done!")
 
 
+# Run the app
 if __name__ == "__main__":
     app()
