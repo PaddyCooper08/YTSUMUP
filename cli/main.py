@@ -1,6 +1,7 @@
 import json
 import requests
 from art import text2art
+import dotenv
 
 import typer
 
@@ -8,7 +9,7 @@ import threading
 import sys
 app = typer.Typer()
 
-
+dotenv.load_dotenv()
 title = "YT SUMUP"
 artwork = text2art(title, font="block")
 
