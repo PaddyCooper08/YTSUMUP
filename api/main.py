@@ -20,9 +20,10 @@ def get_video_id(url):
 
      @return The video id or None if not found in the url or the url doesn't contain the video
     """
-    match = re.search(r"=(\w+)$", url)
+    pattern = r'(?<=\?v=)[^&]+'
+    match = re.search(pattern, url)
     if match:
-        return match.group(1)
+        return match.group(0)
     else:
         return None
 
