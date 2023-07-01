@@ -2,7 +2,7 @@ import json
 import requests
 from art import text2art
 import dotenv
-
+import os
 import typer
 
 import threading
@@ -34,7 +34,8 @@ def process_video(video_url: str, option: int, word_length: int = None, check_gr
         'url': video_url,
         'option': option,
         'word_length': word_length,
-        'check_grammar': check_grammar
+        'check_grammar': check_grammar,
+        'model_url': 'https://api-inference.huggingface.co/models/facebook/bart-large-cnn'
     }
 
     headers = {'Content-Type': 'application/json'}

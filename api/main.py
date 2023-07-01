@@ -69,41 +69,45 @@ def get_script(video_id, length, word_length):
     return script, max_length, min_length
 
 
-def get_summary(script, min_length, max_length):
-    """
-     Get a summary of a script. It is possible to specify min_length and max_length in the parameters
+def get_summary(script, min_length, max_length, model_url):
 
-     @param script - The script to run on HuggingFace
-     @param min_length - The minimum length of the script to run
-     @param max_length - The maximum length of the script to run
+    return make_API_request(script, min_length, max_length,
+                            model_url=model_url)
 
-     @return The summary of the script as a string or None if the script could not be run on Hugging
-    """
+
+def make_API_request(script, min_length, max_length, model_url):
     API_KEY = os.getenv("API_KEY")
     AUTH = f"Bearer {API_KEY}"
-    API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
+    API_URL = model_url
     headers = {"Authorization": AUTH}
 
     def query(payload):
         response = requests.post(API_URL, headers=headers, json=payload)
         return response.json()
+    if model_url == "https://api-inference.huggingface.co/models/google/pegasus-xsum":
 
-    output = query({
-        "inputs": script,
-        "parameters": {
-            "min_length": min_length,
-            "max_length": max_length
-        }
-    })
+        output = query({
+            "inputs": script,
 
+        })
+    else:
+        output = query({
+            "inputs": script,
+            "parameters": {
+                "min_length": min_length,
+                "max_length": max_length
+            }
+        })
     try:
+
         return output[0]['summary_text']
+
     except:
         print(output)
         sys.exit()
 
 
-def process_video(url: str, option: int, word_length: int, check_grammar_var: bool = True):
+def process_video(url: str, option: int, word_length: int, check_grammar_var: bool = True, model_url: str = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"):
     """
      Process a video URL and chosen option. This function is used to process a video URL and the option that is used to determine the video ID
 
@@ -120,7 +124,7 @@ def process_video(url: str, option: int, word_length: int, check_grammar_var: bo
     data = get_script(video_id=id, length=option, word_length=word_length)
 
     summary = get_summary(
-        script=data[0], min_length=data[2], max_length=data[1])
+        script=data[0], min_length=data[2], max_length=data[1], model_url=model_url)
 
     # Check if the grammar variable is present in the script.
     if check_grammar_var == True:
@@ -170,8 +174,10 @@ def process_video_route():
     option = data.get('option')
     word_length = data.get('word_length')
     check_grammar_var = data.get('check_grammar')
+    model_url = data.get('model_url')
 
-    summary = process_video(url, option, word_length, check_grammar_var)
+    summary = process_video(url, option, word_length,
+                            check_grammar_var, model_url)
 
     return jsonify({'summary': summary})
 
