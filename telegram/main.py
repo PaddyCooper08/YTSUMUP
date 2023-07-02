@@ -29,7 +29,8 @@ def process_video(video_url: str, option: int, word_length=None, ):
         'url': str(video_url),
         'option': int(option),
         'word_length': word_length,
-        'check_grammar': True
+        'check_grammar': True,
+        'model_url': 'https://api-inference.huggingface.co/models/facebook/bart-large-cnn'
     }
 
     headers = {'Content-Type': 'application/json'}
