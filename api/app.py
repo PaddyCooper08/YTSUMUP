@@ -28,7 +28,7 @@ def get_video_id(url):
         return None
 
 
-def get_script(video_id, length, word_length):
+def get_script(video_id, length, word_length, custom_percentage=0):
     """
      Gets the script and max / min length. This is used to determine how long a script should be in the video
 
@@ -63,6 +63,10 @@ def get_script(video_id, length, word_length):
 
         min_length = word_length
         max_length = word_length + 1
+    elif custom_percentage > 0 == 5:
+        min_length = int(len(script.split()) / custom_percentage)
+        max_length = min_length + 200
+
     else:
         min_length = 0
         max_length = 0
