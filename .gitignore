@@ -4,3 +4,4 @@ api/api-venv
 /cli/cli-venv
 /telegram/telegram-venv
 */__pycache__
+api/.vercel
