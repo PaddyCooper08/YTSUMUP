@@ -11,7 +11,7 @@ export default function SearchBar(props: SearchBarProps) {
         />
 
         <span
-          className="input-group-text bg-[#222222] my-3 text-lg py-5 flex items-center whitespace-nowrap rounded-r-[2.5rem] px-8 text-center  font-normal text-neutral-700 dark:text-neutral-200"
+          className="input-group-text bg-[#222222] my-3 text-lg py-[1.21rem] flex items-center whitespace-nowrap rounded-r-[2.5rem] px-8 text-center  font-normal text-neutral-700 dark:text-neutral-200"
           id="basic-addon2"
         >
           <svg
