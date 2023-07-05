@@ -17,10 +17,10 @@ export default function SearchBar() {
 
   return (
     <form
-      className="flex flex-wrap justify-center w-full h-full"
+      className="flex flex-wrap items-center justify-center w-full h-full mr-[12rem]"
       onSubmit={handleSubmit}
     >
-      <div className="flex items-center w-1/2 ">
+      <div className="flex justify-center w-1/2">
         <input
           className="relative bg-[#111111] font-sans pl-5 my-3 py-4 text-xl  text-left border-[#282828] rounded-l-[2.5rem] m-0 block min-w-0 placeholder-[#7e7e7e] flex-auto border border-solid focus:border-none  leading-[1.6]  outline-none  text-white focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] "
           placeholder="Enter Youtube URL"
