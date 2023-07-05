@@ -11,7 +11,7 @@ export default function Thumbnail(props: any) {
   }
   return (
     <div>
-      <button onClick={getThumbnail}>{getThumbnail()}</button>
+      <img src={getThumbnail()} alt="" className="h-96" />
     </div>
   );
 }
