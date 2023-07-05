@@ -1,6 +1,7 @@
 "use client";
 import SearchBar from "./SearchBar";
 import Thumbnail from "./Thumbnail";
+
 import { useSnapshot } from "valtio";
 import { state } from "./state";
 export default function Home() {
@@ -9,11 +10,20 @@ export default function Home() {
 
   return (
     <main className="bg-black">
-      <header className="h-[112px] bg-red-700 flex items-center justify-center">
+      <header className="flex items-center justify-center bg-red-700 h-28 ">
+        <img
+          src="https://raw.githubusercontent.com/PaddyCooper08/YTSUMUP/fe40bd73af8c3733c99f7c852aa77cd668513e14/ytsumup-web/assets/logo.svg"
+          alt=""
+          className="h-16 ml-5 w-[10%] z-10"
+        />
         <SearchBar />
       </header>
-
-      <Thumbnail yturl={yturl} />
+      <div className="grid h-full grid-cols-5 gap-0">
+        <div className="flex items-center justify-center h-full col-span-3 bg-blue-700">
+          <Thumbnail yturl={yturl} />
+        </div>
+        <div className="col-span-2 bg-green-700">Right Column (40%)</div>
+      </div>
     </main>
   );
 }
