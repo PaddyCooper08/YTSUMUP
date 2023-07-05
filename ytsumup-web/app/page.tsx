@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <main className="bg-black">
-      <header className="flex items-center justify-center bg-red-700 h-28 ">
+      <header className="flex items-center justify-center h-28 ">
         <img
           src="https://raw.githubusercontent.com/PaddyCooper08/YTSUMUP/fe40bd73af8c3733c99f7c852aa77cd668513e14/ytsumup-web/assets/logo.svg"
           alt=""
@@ -19,7 +19,7 @@ export default function Home() {
         <SearchBar />
       </header>
       <div className="grid h-full grid-cols-5 gap-0">
-        <div className="flex items-center justify-center h-full col-span-3 bg-blue-700">
+        <div className="flex items-center justify-center h-full col-span-3 bg-blue-700 ">
           <Thumbnail yturl={yturl} />
         </div>
         <div className="col-span-2 bg-black">
