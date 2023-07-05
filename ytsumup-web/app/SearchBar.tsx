@@ -1,13 +1,16 @@
 "use client";
+import { useState } from "react";
 export default function SearchBar() {
   function handleSubmit(e: any) {
     // Prevent the browser from reloading the page
     e.preventDefault();
 
     // Read the form data
+    const [searchBarContent, setSearchBarContent] = useState(0);
     const form = e.target;
     const formData = new FormData(form);
-    const searchBarContent = formData.get("Search Bar");
+    const x: any = formData.get("Search Bar");
+    setSearchBarContent(x);
   }
 
   return (
