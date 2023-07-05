@@ -1,7 +1,7 @@
 "use client";
 import SearchBar from "./SearchBar";
 import Thumbnail from "./Thumbnail";
-
+import LengthSlider from "./LengthSlider";
 import { useSnapshot } from "valtio";
 import { state } from "./state";
 export default function Home() {
@@ -22,7 +22,9 @@ export default function Home() {
         <div className="flex items-center justify-center h-full col-span-3 bg-blue-700">
           <Thumbnail yturl={yturl} />
         </div>
-        <div className="col-span-2 bg-green-700">Right Column (40%)</div>
+        <div className="col-span-2 bg-black">
+          <LengthSlider />
+        </div>
       </div>
     </main>
   );
