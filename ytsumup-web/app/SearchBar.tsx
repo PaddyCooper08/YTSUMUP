@@ -1,7 +1,9 @@
 "use client";
 import { state } from "./state";
+import { useSnapshot } from "valtio";
 
 export default function SearchBar() {
+  const snap = useSnapshot(state);
   function handleSubmit(e: any) {
     // Prevent the browser from reloading the page
     e.preventDefault();
@@ -13,6 +15,25 @@ export default function SearchBar() {
     const output: string | undefined = formData.get("Search Bar")?.toString();
     // @ts-ignore
     state.searchBarContent = output;
+    const pattern = /(?<=\?v=)[A-Za-z0-9]{11}/;
+    const yturl = snap.searchBarContent;
+
+    const match = yturl.match(pattern);
+    if (match === null) {
+      if (yturl != "") {
+        state.thumbnailUrl =
+          "https://raw.githubusercontent.com/PaddyCooper08/YTSUMUP/89107803c4ff1c026842ba7f5c869d6ceb66f266/ytsumup-web/assets/enterRealURL.svg";
+        return;
+      } else {
+        state.thumbnailUrl =
+          "https://raw.githubusercontent.com/PaddyCooper08/YTSUMUP/89107803c4ff1c026842ba7f5c869d6ceb66f266/ytsumup-web/assets/enterURL.svg";
+        return;
+      }
+    } else {
+      const ytid = match[0];
+      state.thumbnailUrl = `https://img.youtube.com/vi/${ytid}/maxresdefault.jpg`;
+      return;
+    }
   }
 
   return (
