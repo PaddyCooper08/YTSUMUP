@@ -19,7 +19,7 @@ export default function Home() {
         <SearchBar />
       </header>
       <div className="grid h-full grid-cols-5 gap-0">
-        <div className="flex items-center justify-center h-full col-span-3 bg-blue-700 ">
+        <div className="flex items-center justify-center h-full col-span-3 ">
           <Thumbnail yturl={yturl} />
         </div>
         <div className="col-span-2 bg-black">
