@@ -5,41 +5,41 @@ import { useSnapshot } from "valtio";
 export default function SearchBar() {
   const snap = useSnapshot(state);
   function handleSubmit(e: any) {
-    // Prevent the browser from reloading the page
-    e.preventDefault();
-
     // Read the form data
 
-    const form = e.target;
-    const formData = new FormData(form);
-    const output: string | undefined = formData.get("Search Bar")?.toString();
+    const output: string = e.target.value;
     // @ts-ignore
     state.searchBarContent = output;
     const pattern = /(?<=\?v=)[A-Za-z0-9]{11}/;
-    const yturl = snap.searchBarContent;
+    const yturl = output;
 
     const match = yturl.match(pattern);
     if (match === null) {
       if (yturl != "") {
         state.thumbnailUrl =
           "https://raw.githubusercontent.com/PaddyCooper08/YTSUMUP/89107803c4ff1c026842ba7f5c869d6ceb66f266/ytsumup-web/assets/enterRealURL.svg";
-        return;
       } else {
         state.thumbnailUrl =
           "https://raw.githubusercontent.com/PaddyCooper08/YTSUMUP/89107803c4ff1c026842ba7f5c869d6ceb66f266/ytsumup-web/assets/enterURL.svg";
-        return;
       }
     } else {
       const ytid = match[0];
       state.thumbnailUrl = `https://img.youtube.com/vi/${ytid}/maxresdefault.jpg`;
-      return;
+    }
+  }
+  function onKeyUp(e: any) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      handleSubmit(e);
     }
   }
 
   return (
     <form
       className="flex flex-wrap items-center justify-center w-full h-full mr-[12rem]"
-      onSubmit={handleSubmit}
+      // onSubmit={handleSubmit}
+      onKeyDown={onKeyUp}
     >
       <div className="flex justify-center w-1/2">
         <input
@@ -48,6 +48,7 @@ export default function SearchBar() {
           aria-label="Search"
           aria-describedby="button-addon2"
           name="Search Bar"
+          type="text"
         />
 
         <button
