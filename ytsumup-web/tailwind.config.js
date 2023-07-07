@@ -15,6 +15,7 @@ module.exports = {
        fontFamily: {
         'sans': [ 'Arial', 'sans-serif'],
         'roboto': ['Roboto', 'sans-serif'],
+        'youtube-sans': ['Youtube Sans', 'sans-serif'],
         
       },
       
