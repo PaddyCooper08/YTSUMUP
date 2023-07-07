@@ -2,7 +2,7 @@
 import { state } from "./state";
 import { useSnapshot } from "valtio";
 
-export default function SearchBar() {
+export default async function SearchBar() {
   const snap = useSnapshot(state);
   function handleSubmit(e: any) {
     e.preventDefault();
@@ -33,7 +33,8 @@ export default function SearchBar() {
     } else {
       const ytid = match[0];
       state.ytid = ytid;
-      state.thumbnailUrl = `https://img.youtube.com/vi/${ytid}/maxresdefault.jpg`;
+
+      state.thumbnailUrl = `https://img.youtube.com/vi/${ytid}/default.jpg`;
     }
   }
   function onKeyUp(e: any) {
