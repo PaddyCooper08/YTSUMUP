@@ -1,4 +1,7 @@
 import Image from "next/image";
+// @ts-ignore
+import Truncate from "react-truncate";
+import ts from "typescript";
 
 async function getData(ytid: string) {
   const options = { method: "GET", headers: { Accept: "application/json" } };
@@ -41,8 +44,15 @@ function formatNumber(number: number) {
     return number.toString();
   }
 }
-function truncate(source: string, size: number) {
-  return source.length > size ? source.slice(0, size - 1) + "…" : source;
+function truncate(source: string, maxLines: number) {
+  const lines = source.split("\n");
+  if (lines.length <= maxLines) {
+    return source;
+  }
+
+  const truncatedLines = lines.slice(0, maxLines);
+  const truncatedText = truncatedLines.join("\n");
+  return truncatedText + "...";
 }
 
 export default async function YoutubeTitle(props: any) {
@@ -77,7 +87,9 @@ export default async function YoutubeTitle(props: any) {
             />
 
             <h2 className="ml-3 font-semibold font-youtube-sans font-xl">
-              {channelTitle}
+              <Truncate lines={3} ellipsis={<span>...</span>}>
+                <h2 className="text-left">{channelTitle}</h2>
+              </Truncate>
             </h2>
             <div className=" ml-3 text-left flex items-center font-youtube-sans text-[#3d3d3d]">
               <h4>{formatNumber(subscriberCount)} subscribers</h4>
@@ -87,7 +99,9 @@ export default async function YoutubeTitle(props: any) {
           </div>
         </div>
         <div className=" font-youtube-sans col-span-7 flex text-left ml-0 mt-3 w-full items-center text-[#3d3d3d]">
-          <h2 className="text-left">{truncate(description, 250)}</h2>
+          <Truncate lines={3} ellipsis={<span>...</span>}>
+            <h2 className="text-left">{description}</h2>
+          </Truncate>
         </div>
       </div>
     </div>
