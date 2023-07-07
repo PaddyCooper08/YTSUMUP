@@ -2,7 +2,7 @@
 import { state } from "./state";
 import { useSnapshot } from "valtio";
 
-export default async function SearchBar() {
+export default function SearchBar() {
   const snap = useSnapshot(state);
   function handleSubmit(e: any) {
     e.preventDefault();
@@ -33,7 +33,6 @@ export default async function SearchBar() {
     } else {
       const ytid = match[0];
       state.ytid = ytid;
-
       state.thumbnailUrl = `https://i.ytimg.com/vi/${ytid}/default.jpg`;
     }
   }
