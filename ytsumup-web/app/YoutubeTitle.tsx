@@ -37,7 +37,7 @@ async function getChannelData(channelId: string) {
 }
 function formatNumber(number: number) {
   if (number >= 1000000) {
-    return (number / 1000000).toFixed(1) + "m";
+    return (number / 1000000).toFixed(1) + "M";
   } else if (number >= 1000) {
     return (number / 1000).toFixed(1) + "k";
   } else {
@@ -59,7 +59,7 @@ export default async function YoutubeTitle(props: any) {
   const channelData: any = await getChannelData(channelId);
 
   const title = truncate(data.items[0].snippet.title, 35);
-  const channelTitle = truncate(data.items[0].snippet.channelTitle, 10);
+  const channelTitle = truncate(data.items[0].snippet.channelTitle, 50);
   const viewCount = data.items[0].statistics.viewCount;
   const likeCount = data.items[0].statistics.likeCount;
   const description = data.items[0].snippet.description;
@@ -106,9 +106,9 @@ export default async function YoutubeTitle(props: any) {
           </div>
         </div>
 
-        <div className="font-youtube-sans col-span-7 flex text-left ml-0 mt-3 w-full items-center text-[#3d3d3d]">
+        <div className="font-youtube-sans col-span-7 flex text-left ml-0  w-full items-center text-[#3d3d3d]">
           <TextTruncate
-            line={3}
+            line={4}
             element="span"
             truncateText="…"
             text={description}
