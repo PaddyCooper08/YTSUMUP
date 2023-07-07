@@ -14,7 +14,7 @@ export default function Home() {
         <img
           src="https://raw.githubusercontent.com/PaddyCooper08/YTSUMUP/fe40bd73af8c3733c99f7c852aa77cd668513e14/ytsumup-web/assets/logo.svg"
           alt=""
-          className="h-16 ml-5 w-[10%] z-10"
+          className="h-16 ml-16 w-[10%] z-10"
         />
         <SearchBar />
       </header>
