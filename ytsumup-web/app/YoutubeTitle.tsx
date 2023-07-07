@@ -70,12 +70,12 @@ export default async function YoutubeTitle(props: any) {
   return (
     <div className="ml-3 w-[62.5rem] mr-0 mt-3">
       <div className="flex items-center grid-cols-12 gap-0 font-sans">
-        <div className="w-full col-span-5 ">
+        <div className="w-full col-span-5">
           <div className="flex text-2xl font-bold font-youtube-sans">
             {title}
           </div>
 
-          <div className="flex items-center ">
+          <div className="flex items-center mt-3">
             <Image
               src={channelPfp}
               height="50"
@@ -83,19 +83,30 @@ export default async function YoutubeTitle(props: any) {
               alt="Youtube Thumbnail"
               style={{ borderRadius: "50%" }}
             />
-
-            <h2 className="ml-3 font-semibold font-youtube-sans font-xl">
-              {channelTitle}
-            </h2>
-
-            <div className=" ml-3 text-left flex items-center font-youtube-sans text-[#3d3d3d]">
-              <h4>{formatNumber(subscriberCount)} subscribers</h4>
-              <h2 className="ml-2"> Views {formatNumber(viewCount)}</h2>
-              <h2 className="ml-2"> Likes {formatNumber(likeCount)}</h2>
+            <div className="grid-rows-2">
+              <div className="row-span-1">
+                <h2
+                  id="channelTitle"
+                  className="ml-3 font-semibold font-youtube-sans font-xl"
+                >
+                  {channelTitle}
+                </h2>
+              </div>
+              <div className="row-span-1">
+                <div
+                  id="data-under-video"
+                  className="ml-3 flex    font-youtube-sans text-[#3d3d3d]"
+                >
+                  <h4>{formatNumber(subscriberCount)} subscribers</h4>
+                  <h2 className="ml-2">Views {formatNumber(viewCount)}</h2>
+                  <h2 className="ml-2">Likes {formatNumber(likeCount)}</h2>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div className=" font-youtube-sans col-span-7 flex text-left ml-0 mt-3 w-full items-center text-[#3d3d3d]">
+
+        <div className="font-youtube-sans col-span-7 flex text-left ml-0 mt-3 w-full items-center text-[#3d3d3d]">
           <TextTruncate
             line={3}
             element="span"
