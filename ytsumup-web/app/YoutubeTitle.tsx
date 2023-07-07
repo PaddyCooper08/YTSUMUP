@@ -58,8 +58,8 @@ export default async function YoutubeTitle(props: any) {
   const channelId = data.items[0].snippet.channelId;
   const channelData: any = await getChannelData(channelId);
 
-  const title = truncate(data.items[0].snippet.title, 35);
-  const channelTitle = truncate(data.items[0].snippet.channelTitle, 50);
+  const title = truncate(data.items[0].snippet.title, 36);
+  const channelTitle = truncate(data.items[0].snippet.channelTitle, 38);
   const viewCount = data.items[0].statistics.viewCount;
   const likeCount = data.items[0].statistics.likeCount;
   const description = data.items[0].snippet.description;
