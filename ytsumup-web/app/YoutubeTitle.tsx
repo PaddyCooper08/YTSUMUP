@@ -106,7 +106,7 @@ export default async function YoutubeTitle(props: any) {
           </div>
         </div>
 
-        <div className="font-youtube-sans col-span-7 flex text-left ml-0  w-full items-center text-[#3d3d3d]">
+        <div className="font-youtube-sans col-span-7 flex text-left ml-0 mb-1  w-full items-center text-[#3d3d3d]">
           <TextTruncate
             line={4}
             element="span"
