@@ -31,7 +31,7 @@ export default function Thumbnail(props: any) {
           alt="Youtube Thumbnail"
           className=" border-solid border-4 border-[#222222] font-sans ml-3"
         />
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<p className="ml-3">Loading...</p>}>
           <YoutubeTitle id={state.ytid} />
         </Suspense>
       </div>

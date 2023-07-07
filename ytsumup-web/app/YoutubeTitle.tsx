@@ -17,5 +17,5 @@ async function getData(ytid: string) {
 export default async function YoutubeTitle(props: any) {
   const data: any = await getData(props.id);
 
-  return <div>Title: {data.items[0].snippet.title}</div>;
+  return <div className="ml-3">Title: {data.items[0].snippet.title}</div>;
 }

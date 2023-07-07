@@ -5,9 +5,15 @@ import { useSnapshot } from "valtio";
 export default function SearchBar() {
   const snap = useSnapshot(state);
   function handleSubmit(e: any) {
-    // Read the form data
+    e.preventDefault();
+    e = document.getElementById("searchBarInput");
 
-    const output: string = e.target.value;
+    // @ts-ignore
+
+    // Read the form data
+    // @ts-ignore
+
+    const output = e.value;
     // @ts-ignore
     state.searchBarContent = output;
     const pattern = /(?<=\?v=)[^&]{11}/;
@@ -52,12 +58,13 @@ export default function SearchBar() {
           aria-describedby="button-addon2"
           name="Search Bar"
           type="text"
+          id="searchBarInput"
         />
 
         <button
           className="input-group-text bg-[#222222] my-3 text-lg py-[1.3rem] flex items-center whitespace-nowrap rounded-r-[2.5rem] px-8 text-center  font-sans "
           id="basic-addon2"
-          type="submit"
+          onClick={handleSubmit}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
