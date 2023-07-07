@@ -18,11 +18,11 @@ export default function Home() {
         />
         <SearchBar />
       </header>
-      <div className="grid h-full grid-cols-5 gap-0">
-        <div className="flex items-center justify-center h-full col-span-3 ">
+      <div className="grid h-full grid-cols-12 gap-0">
+        <div className="flex items-center justify-center h-full col-span-7 px-4">
           <Thumbnail yturl={yturl} />
         </div>
-        <div className="col-span-2 bg-black">
+        <div className="w-full col-span-5 bg-black">
           <LengthSlider />
         </div>
       </div>

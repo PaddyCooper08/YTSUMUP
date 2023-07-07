@@ -14,21 +14,21 @@ export default function Thumbnail(props: any) {
       <div>
         <Image
           src={snap.thumbnailUrl}
+          height="1000"
           width="1000"
-          height="500"
           alt="Youtube Thumbnail"
-          className="  border-solid border-4 border-[#222222] font-sans"
+          className=" border-solid border-4 border-[#222222] font-sans ml-3"
         />
-        <h1>{state.ytid}</h1>
       </div>
     );
   } else {
     return (
       <div>
-        <img
+        <Image
           src={snap.thumbnailUrl}
-          alt=""
-          className="h-96  border-solid border-4 border-[#222222] font-sans"
+          fill={true}
+          alt="Youtube Thumbnail"
+          className=" border-solid border-4 border-[#222222] font-sans ml-3"
         />
         <Suspense fallback={<p>Loading...</p>}>
           <YoutubeTitle id={state.ytid} />

@@ -13,7 +13,7 @@ export default function LengthSlider() {
   const snap = useSnapshot(state);
   const sliderValue: number = snap.sliderValue;
   return (
-    <div className="p-8 text-roboto ">
+    <div className="pl-8 pr-20 text-roboto">
       <h1 className="text-4xl text-[#b9b9b9] text-center p-2  ">
         Summary Length
       </h1>
