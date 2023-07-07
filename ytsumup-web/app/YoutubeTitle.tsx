@@ -76,11 +76,12 @@ export default async function YoutubeTitle(props: any) {
               style={{ borderRadius: "50%" }}
             />
 
-            <h2 className="ml-3 font-semibold font-youtube-sans font-xl">
-              <Truncate lines={1} ellipsis={<span>...</span>}>
-                <h2 className="text-left">{channelTitle}</h2>
-              </Truncate>
-            </h2>
+            <Truncate lines={1} ellipsis={<span>...</span>}>
+              <h2 className="ml-3 font-semibold font-youtube-sans font-xl">
+                {channelTitle}
+              </h2>
+            </Truncate>
+
             <div className=" ml-3 text-left flex items-center font-youtube-sans text-[#3d3d3d]">
               <h4>{formatNumber(subscriberCount)} subscribers</h4>
               <h2 className="ml-2"> Views {formatNumber(viewCount)}</h2>
