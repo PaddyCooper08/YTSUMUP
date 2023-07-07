@@ -10,20 +10,23 @@ export default function SearchBar() {
     const output: string = e.target.value;
     // @ts-ignore
     state.searchBarContent = output;
-    const pattern = /(?<=\?v=)[A-Za-z0-9]{11}/;
+    const pattern = /(?<=\?v=)[^&]{11}/;
     const yturl = output;
 
     const match = yturl.match(pattern);
     if (match === null) {
       if (yturl != "") {
+        state.ytid = "";
         state.thumbnailUrl =
           "https://raw.githubusercontent.com/PaddyCooper08/YTSUMUP/89107803c4ff1c026842ba7f5c869d6ceb66f266/ytsumup-web/assets/enterRealURL.svg";
       } else {
+        state.ytid = "";
         state.thumbnailUrl =
           "https://raw.githubusercontent.com/PaddyCooper08/YTSUMUP/89107803c4ff1c026842ba7f5c869d6ceb66f266/ytsumup-web/assets/enterURL.svg";
       }
     } else {
       const ytid = match[0];
+      state.ytid = ytid;
       state.thumbnailUrl = `https://img.youtube.com/vi/${ytid}/maxresdefault.jpg`;
     }
   }
