@@ -44,16 +44,6 @@ function formatNumber(number: number) {
     return number.toString();
   }
 }
-function truncate(source: string, maxLines: number) {
-  const lines = source.split("\n");
-  if (lines.length <= maxLines) {
-    return source;
-  }
-
-  const truncatedLines = lines.slice(0, maxLines);
-  const truncatedText = truncatedLines.join("\n");
-  return truncatedText + "...";
-}
 
 export default async function YoutubeTitle(props: any) {
   const data: any = await getData(props.id);
@@ -87,7 +77,7 @@ export default async function YoutubeTitle(props: any) {
             />
 
             <h2 className="ml-3 font-semibold font-youtube-sans font-xl">
-              <Truncate lines={3} ellipsis={<span>...</span>}>
+              <Truncate lines={1} ellipsis={<span>...</span>}>
                 <h2 className="text-left">{channelTitle}</h2>
               </Truncate>
             </h2>
