@@ -1,6 +1,6 @@
 import Image from "next/image";
 // @ts-ignore
-import Truncate from "react-truncate";
+import TextTruncate from "react-text-truncate"; // recommend
 import ts from "typescript";
 
 async function getData(ytid: string) {
@@ -44,14 +44,22 @@ function formatNumber(number: number) {
     return number.toString();
   }
 }
+function truncate(source: string, maxCharacters: number) {
+  if (source.length <= maxCharacters) {
+    return source;
+  }
+
+  const truncatedText = source.slice(0, maxCharacters);
+  return truncatedText + "...";
+}
 
 export default async function YoutubeTitle(props: any) {
   const data: any = await getData(props.id);
   const channelId = data.items[0].snippet.channelId;
   const channelData: any = await getChannelData(channelId);
 
-  const title = data.items[0].snippet.title;
-  const channelTitle = data.items[0].snippet.channelTitle;
+  const title = truncate(data.items[0].snippet.title, 35);
+  const channelTitle = truncate(data.items[0].snippet.channelTitle, 10);
   const viewCount = data.items[0].statistics.viewCount;
   const likeCount = data.items[0].statistics.likeCount;
   const description = data.items[0].snippet.description;
@@ -76,11 +84,9 @@ export default async function YoutubeTitle(props: any) {
               style={{ borderRadius: "50%" }}
             />
 
-            <Truncate lines={1} ellipsis={<span>...</span>}>
-              <h2 className="ml-3 font-semibold font-youtube-sans font-xl">
-                {channelTitle}
-              </h2>
-            </Truncate>
+            <h2 className="ml-3 font-semibold font-youtube-sans font-xl">
+              {channelTitle}
+            </h2>
 
             <div className=" ml-3 text-left flex items-center font-youtube-sans text-[#3d3d3d]">
               <h4>{formatNumber(subscriberCount)} subscribers</h4>
@@ -90,9 +96,12 @@ export default async function YoutubeTitle(props: any) {
           </div>
         </div>
         <div className=" font-youtube-sans col-span-7 flex text-left ml-0 mt-3 w-full items-center text-[#3d3d3d]">
-          <Truncate lines={3} ellipsis={<span>...</span>}>
-            <h2 className="text-left">{description}</h2>
-          </Truncate>
+          <TextTruncate
+            line={3}
+            element="span"
+            truncateText="…"
+            text={description}
+          />
         </div>
       </div>
     </div>
