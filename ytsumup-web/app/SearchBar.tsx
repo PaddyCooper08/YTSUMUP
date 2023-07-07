@@ -34,7 +34,7 @@ export default async function SearchBar() {
       const ytid = match[0];
       state.ytid = ytid;
 
-      state.thumbnailUrl = `https://img.youtube.com/vi/${ytid}/default.jpg`;
+      state.thumbnailUrl = `https://i.ytimg.com/vi/${ytid}/default.jpg`;
     }
   }
   function onKeyUp(e: any) {
