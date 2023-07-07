@@ -33,7 +33,7 @@ export default function SearchBar() {
     } else {
       const ytid = match[0];
       state.ytid = ytid;
-      state.thumbnailUrl = `https://i.ytimg.com/vi/${ytid}/high.jpg`;
+      state.thumbnailUrl = `https://i.ytimg.com/vi/${ytid}/hqdefault.jpg`;
     }
   }
   function onKeyUp(e: any) {
