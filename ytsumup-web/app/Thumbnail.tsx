@@ -26,7 +26,8 @@ export default function Thumbnail(props: any) {
       <div>
         <Image
           src={snap.thumbnailUrl}
-          fill={true}
+          height="1000"
+          width="1000"
           alt="Youtube Thumbnail"
           className=" border-solid border-4 border-[#222222] font-sans ml-3"
         />
