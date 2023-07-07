@@ -17,7 +17,13 @@ export default function Thumbnail(props: any) {
           height="1000"
           width="1000"
           alt="Youtube Thumbnail"
+          onError={(e) =>
+            (state.thumbnailUrl =
+              "https://raw.githubusercontent.com/PaddyCooper08/YTSUMUP/863ccecc1733fc350fd39c8c5c400297b6ea6c60/ytsumup-web/assets/error.svg")
+          }
           className=" border-solid border-4 border-[#222222] font-sans ml-3"
+
+          // onerror = null;
         />
       </div>
     );
@@ -29,6 +35,10 @@ export default function Thumbnail(props: any) {
           height="1000"
           width="1000"
           alt="Youtube Thumbnail"
+          onError={(e) =>
+            (state.thumbnailUrl =
+              "https://raw.githubusercontent.com/PaddyCooper08/YTSUMUP/863ccecc1733fc350fd39c8c5c400297b6ea6c60/ytsumup-web/assets/error.svg")
+          }
           className=" border-solid border-4 border-[#222222] font-sans ml-3"
         />
         <Suspense fallback={<p className="ml-3">Loading...</p>}>
