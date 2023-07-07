@@ -46,7 +46,7 @@ export default function SearchBar() {
 
   return (
     <form
-      className="flex flex-wrap items-center justify-center w-full h-full mr-[14.75rem]"
+      className="flex flex-wrap items-center justify-center w-full h-full mr-[14.85rem]"
       // onSubmit={handleSubmit}
       onKeyDown={onKeyUp}
     >
