@@ -50,31 +50,38 @@ def get_script(video_id, length, word_length, custom_percentage=0):
 
     script = concatenated_text.strip()
     # Calculate the minimum and maximum length of the script.
-    if custom_percentage != 0:
-        min_length = int(len(script.split()) * (custom_percentage / 100))
+
+    if custom_percentage != 0 and custom_percentage:
+        num = int(custom_percentage) / 100
+
+        min_length = int(len(script.split()) * num)
         max_length = min_length + 25
+
     else:
-        if length == 1:
+
+        if int(length) == 1:
+
             min_length = int(len(script.split()) / 16)
             max_length = min_length + 25
-        elif length == 2:
+        elif int(length) == 2:
             min_length = int(len(script.split()) / 12)
             max_length = min_length + 50
-        elif length == 3:
+        elif int(length) == 3:
             min_length = int(len(script.split()) / 8)
             max_length = min_length + 100
-        elif length == 4:
+        elif int(length) == 4:
 
             min_length = word_length
             max_length = word_length + 1
-        elif custom_percentage > 0 == 5:
-            min_length = int(len(script.split()) / custom_percentage)
-            max_length = min_length + 200
+        # elif custom_percentage > 0 == 5:
+        #     min_length = int(len(script.split()) / custom_percentage)
+        #     max_length = min_length + 200
 
         else:
             min_length = 0
             max_length = 0
 
+    print(max_length, min_length)
     return script, max_length, min_length
 
 
@@ -108,15 +115,15 @@ def make_API_request(script, min_length, max_length, model_url):
             }
         })
     try:
-
+        print(f"Output: {output[0]['summary_text']}")
         return output[0]['summary_text']
 
     except:
-        print(output)
+        print(f"error: {output}")
         sys.exit()
 
 
-def process_video(url: str, option: int, word_length: int, check_grammar_var: bool = True, model_url: str = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"):
+def process_video(url: str, option: int, word_length: int, check_grammar_var: bool = True, model_url: str = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn", custom_percentage: int = 0, ):
     """
      Process a video URL and chosen option. This function is used to process a video URL and the option that is used to determine the video ID
 
@@ -130,7 +137,8 @@ def process_video(url: str, option: int, word_length: int, check_grammar_var: bo
     # Process the video URL and chosen option
     id = get_video_id(url=url)
 
-    data = get_script(video_id=id, length=option, word_length=word_length)
+    data = get_script(video_id=id, length=option,
+                      word_length=word_length, custom_percentage=custom_percentage)
 
     summary = get_summary(
         script=data[0], min_length=data[2], max_length=data[1], model_url=model_url)
@@ -184,9 +192,10 @@ def process_video_route():
     word_length = data.get('word_length')
     check_grammar_var = data.get('check_grammar')
     model_url = data.get('model_url')
+    custom_percentage = data.get('custom_percentage')
 
     summary = process_video(url, option, word_length,
-                            check_grammar_var, model_url)
+                            check_grammar_var, model_url, custom_percentage)
 
     return jsonify({'summary': summary})
 
