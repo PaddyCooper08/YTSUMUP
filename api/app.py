@@ -50,26 +50,30 @@ def get_script(video_id, length, word_length, custom_percentage=0):
 
     script = concatenated_text.strip()
     # Calculate the minimum and maximum length of the script.
-    if length == 1:
-        min_length = int(len(script.split()) / 16)
+    if custom_percentage != 0:
+        min_length = int(len(script.split()) * (custom_percentage / 100))
         max_length = min_length + 25
-    elif length == 2:
-        min_length = int(len(script.split()) / 12)
-        max_length = min_length + 50
-    elif length == 3:
-        min_length = int(len(script.split()) / 8)
-        max_length = min_length + 100
-    elif length == 4:
-
-        min_length = word_length
-        max_length = word_length + 1
-    elif custom_percentage > 0 == 5:
-        min_length = int(len(script.split()) / custom_percentage)
-        max_length = min_length + 200
-
     else:
-        min_length = 0
-        max_length = 0
+        if length == 1:
+            min_length = int(len(script.split()) / 16)
+            max_length = min_length + 25
+        elif length == 2:
+            min_length = int(len(script.split()) / 12)
+            max_length = min_length + 50
+        elif length == 3:
+            min_length = int(len(script.split()) / 8)
+            max_length = min_length + 100
+        elif length == 4:
+
+            min_length = word_length
+            max_length = word_length + 1
+        elif custom_percentage > 0 == 5:
+            min_length = int(len(script.split()) / custom_percentage)
+            max_length = min_length + 200
+
+        else:
+            min_length = 0
+            max_length = 0
 
     return script, max_length, min_length
 
