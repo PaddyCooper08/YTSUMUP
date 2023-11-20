@@ -3,6 +3,7 @@ import re
 import sys
 from youtube_transcript_api import YouTubeTranscriptApi
 from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 
 from dotenv import load_dotenv  # type: ignore
 import requests
@@ -210,5 +211,6 @@ def process_video_route():
 
 # Run the Flask application.
 if __name__ == '__main__':
+    cors = CORS(app)
 
     app.run()
