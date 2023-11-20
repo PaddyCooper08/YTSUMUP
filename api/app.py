@@ -53,6 +53,7 @@ def get_script(video_id, length, word_length, custom_percentage=0):
     # Calculate the minimum and maximum length of the script.
 
     if custom_percentage != 0 and custom_percentage:
+
         num = int(custom_percentage) / 100
 
         min_length = int(len(script.split()) * num)
@@ -120,8 +121,10 @@ def make_API_request(script, min_length, max_length, model_url):
         return output[0]['summary_text']
 
     except:
-        print(f"error: {output}")
-        sys.exit()
+        print("Made it to error")
+        error = "error: " + str(output['error'])
+
+        return error
 
 
 def process_video(url: str, option: int, word_length: int, check_grammar_var: bool = True, model_url: str = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn", custom_percentage: int = 0, ):
@@ -174,6 +177,7 @@ def check_grammar(script):
         "inputs": script,
     })
     try:
+        # print(f"Output: {output[0]['generated_text']}")
         return output[0]['generated_text']
     except:
         return output
@@ -197,8 +201,11 @@ def process_video_route():
 
     summary = process_video(url, option, word_length,
                             check_grammar_var, model_url, custom_percentage)
-
-    return jsonify({'summary': summary})
+    print(str(summary))
+    if "error" in str(summary):
+        return jsonify({'error': summary})
+    else:
+        return jsonify({'summary': summary})
 
 
 # @app.route('/check_grammar', methods=['POST'])
