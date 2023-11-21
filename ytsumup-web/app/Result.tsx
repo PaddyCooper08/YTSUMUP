@@ -25,13 +25,13 @@ async function getOutput() {
 
   const res = await fetch("http://localhost:5000/process_video", options);
   const output = await res.json();
-  console.log(output);
-  if (output["summary"] != undefined) {
+  console.log(typeof output["summary"]);
+  if (typeof output["summary"] === "string") {
     console.log("output", output["summary"]);
     return output["summary"];
   } else {
-    console.log(output["error"]);
-    return output["error"];
+    console.log("made error");
+    return "error: " + output;
   }
 }
 

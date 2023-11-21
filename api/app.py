@@ -117,7 +117,8 @@ def make_API_request(script, min_length, max_length, model_url):
             }
         })
     try:
-        print(f"Output: {output[0]['summary_text']}")
+        # print(f"Output: {output[0]['summary_text']}")
+        print("Summary received")
         return output[0]['summary_text']
 
     except:
@@ -201,11 +202,11 @@ def process_video_route():
 
     summary = process_video(url, option, word_length,
                             check_grammar_var, model_url, custom_percentage)
-    print(str(summary))
-    if "error" in str(summary):
-        return jsonify({'error': summary})
-    else:
-        return jsonify({'summary': summary})
+    print(str(f"Output: {summary}"))
+    # if "error" in str(summary):
+    #     return jsonify({'error': summary})
+    # else:
+    return jsonify({'summary': summary})
 
 
 # @app.route('/check_grammar', methods=['POST'])
