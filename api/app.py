@@ -9,6 +9,8 @@ from dotenv import load_dotenv  # type: ignore
 import requests
 load_dotenv()
 
+summaryError = None
+
 
 app = Flask(__name__)
 
@@ -17,7 +19,7 @@ def get_video_id(url):
     """
      Extract and return the video id from a video url. This is used with the youtube_transcript_api library to get the transcript of the youtube video
 
-     @param url - The url of the video
+     @param url - The url of the videoglobal hello
 
      @return The video id or None if not found in the url or the url doesn't contain the video
     """
@@ -41,7 +43,7 @@ def get_script(video_id, length, word_length, custom_percentage=0):
     """
     response = YouTubeTranscriptApi.get_transcript(str(video_id))
     concatenated_text = ''
-    # Returns a string representing the response.
+    # Returns a string representing the reglobal hellosponse.
     for item in response:
         concatenated_text += item['text'] + ' '
     try:
@@ -83,7 +85,7 @@ def get_script(video_id, length, word_length, custom_percentage=0):
             min_length = 0
             max_length = 0
 
-    print(max_length, min_length)
+    print(f"Word length (max,min): {max_length}, {min_length}")
     return script, max_length, min_length
 
 
@@ -118,14 +120,17 @@ def make_API_request(script, min_length, max_length, model_url):
         })
     try:
         # print(f"Output: {output[0]['summary_text']}")
-        print("Summary received")
+        print(f"Output direct from summary api (no grammar) {output}")
+
         return output[0]['summary_text']
 
     except:
         print("Made it to error")
-        error = "error: " + str(output['error'])
+        global summaryError
+        summaryError = "error: " + str(output['error'])
+        print(summaryError)
 
-        return error
+        return summaryError
 
 
 def process_video(url: str, option: int, word_length: int, check_grammar_var: bool = True, model_url: str = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn", custom_percentage: int = 0, ):
@@ -147,14 +152,20 @@ def process_video(url: str, option: int, word_length: int, check_grammar_var: bo
 
     summary = get_summary(
         script=data[0], min_length=data[2], max_length=data[1], model_url=model_url)
-
-    # Check if the grammar variable is present in the script.
-    if check_grammar_var == True:
-        summary = check_grammar(script=summary)
-
-        return summary
+    print(f"summaryError contents: {summaryError}")
+    if summaryError:
+        print("summaryError received, skipping grammar check")
+        return summaryError
     else:
-        return summary
+
+        # Check if the grammar variable is present in the script.
+        if check_grammar_var == True:
+            print("Checking grammar...")
+            summary = check_grammar(script=summary)
+
+            return summary
+        else:
+            return summary
 
 
 def check_grammar(script):
@@ -179,6 +190,7 @@ def check_grammar(script):
     })
     try:
         # print(f"Output: {output[0]['generated_text']}")
+        print(f"Grammar output: {output}")
         return output[0]['generated_text']
     except:
         return output
@@ -202,11 +214,12 @@ def process_video_route():
 
     summary = process_video(url, option, word_length,
                             check_grammar_var, model_url, custom_percentage)
-    print(str(f"Output: {summary}"))
+
+    print(str(f"Finished product, ready to be returned: {summary}"))
     # if "error" in str(summary):
     #     return jsonify({'error': summary})
     # else:
-    return jsonify({'summary': summary})
+    return jsonify(summary)
 
 
 # @app.route('/check_grammar', methods=['POST'])

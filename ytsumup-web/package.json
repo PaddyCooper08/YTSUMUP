@@ -24,7 +24,7 @@
     "react-dom": "18.2.0",
     "react-text-truncate": "^0.19.0",
     "tailwindcss": "3.3.2",
-    "typescript": "5.1.6",
+    "typescript": "^5.3.3",
     "valtio": "^1.10.6",
     "youtube-thumbnail-api": "^1.0.2"
   }

@@ -22,17 +22,27 @@ async function getOutput() {
     headers: { "content-type": "application/json" },
     body: JSON.stringify(data),
   };
+  let finished = false;
 
   const res = await fetch("http://localhost:5000/process_video", options);
   const output = await res.json();
-  console.log(typeof output["summary"]);
-  if (typeof output["summary"] === "string") {
-    console.log("output", output["summary"]);
-    return output["summary"];
-  } else {
-    console.log("made error");
-    return "error: " + output;
-  }
+  console.log(output);
+  console.log(typeof output);
+  // state.output = output;
+  // console.log(`State: ${state.output}`);
+  return output;
+  // console.log(typeof output["summary"]);
+  // if (typeof output["summary"] === "string") {
+  //   console.log("output", output["summary"]);
+  //   finished = true;
+  //   console.log(`Finished ${finished}`);
+  //   return output["summary"];
+  // } else {
+  //   console.log("made error");
+  //   console.log(`Finished ${finished}`);
+  //   finished = true;
+  //   return "error: " + output;
+  // }
 }
 
 export default async function Result() {
